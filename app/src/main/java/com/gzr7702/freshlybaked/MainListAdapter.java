@@ -29,7 +29,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
             super(view);
             recipeView = view;
             recipeText = (TextView) view.findViewById(R.id.recipe_row_text);
-            recipeImage = (ImageView) view.findViewById(R.id.recipe_row_iamge);
+            recipeImage = (ImageView) view.findViewById(R.id.recipe_row_image);
         }
     }
 
