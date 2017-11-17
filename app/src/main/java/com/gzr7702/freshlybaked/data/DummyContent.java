@@ -1,4 +1,4 @@
-package com.gzr7702.freshlybaked.dummy;
+package com.gzr7702.freshlybaked.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;

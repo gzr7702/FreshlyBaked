@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gzr7702.freshlybaked.dummy.DummyContent;
-
 /**
  * Created by rob on 10/12/17.
  */

@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.gzr7702.freshlybaked.dummy.DummyContent;
+import com.gzr7702.freshlybaked.data.DummyContent;
 
 import java.util.List;
 

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.gzr7702.freshlybaked.dummy.DummyContent;
+import com.gzr7702.freshlybaked.data.DummyContent;
 
 /**
  * A fragment representing a single RecipeStep detail screen.
