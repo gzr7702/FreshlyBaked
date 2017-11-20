@@ -111,22 +111,30 @@ public class RecipeLoader extends AsyncTaskLoader<List<Recipe>> {
 
                 String name = recipe.getString("name");
                 String servings = recipe.getString("servings");
-                ArrayList<Ingredient> ingredientArray;
-                ArrayList<Instruction> istructionArray;
+                ArrayList<Ingredient> ingredientArray = new ArrayList<>();
+                ArrayList<Instruction> instructionArray = new ArrayList<>();
 
                 // populate ingredients array
                 JSONArray ingredientJsonArray = recipe.getJSONArray("ingredients");
-                Log.v(LOG_TAG, "ingredient Array " + ingredientJsonArray.toString());
                 for (int j = 0; j < ingredientJsonArray.length(); j++) {
-                    //create Ingredient object, at to ingredient array
+                    String ingredientString = ingredientJsonArray.getJSONObject(j).getString("ingredient");
+                    int quantityString = ingredientJsonArray.getJSONObject(j).getInt("quantity");
+                    String measureString = ingredientJsonArray.getJSONObject(j).getString("measure");
+                    ingredientArray.add(new Ingredient(quantityString, measureString, ingredientString));
                 }
 
                 // populate instructions array
                 JSONArray instructionsJsonArray = recipe.getJSONArray("steps");
-                Log.v(LOG_TAG, "instructions Array " + instructionsJsonArray.toString());
-                for (int k = 0; k < ingredientJsonArray.length(); k++) {
+                //Log.v(LOG_TAG, "instructions Array " + instructionsJsonArray.toString());
+                for (int k = 0; k < instructionsJsonArray.length(); k++) {
                     //create Ingredient object, at to ingredient array
+                    String shortDescription = instructionsJsonArray.getJSONObject(k).getString("shortDescription");
+                    String regularDescription = instructionsJsonArray.getJSONObject(k).getString("description");
+                    String videoUrl = instructionsJsonArray.getJSONObject(k).getString("videoURL");
+                    String thumbnailUrl = instructionsJsonArray.getJSONObject(k).getString("thumbnailURL");
+                    instructionArray.add(new Instruction(shortDescription, regularDescription, videoUrl, thumbnailUrl));
                 }
+                Log.v(LOG_TAG, instructionArray.toString());
 
                 //recipeList.add(new Recipe());
             }

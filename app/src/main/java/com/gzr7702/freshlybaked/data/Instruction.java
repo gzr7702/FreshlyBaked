@@ -48,4 +48,9 @@ public class Instruction {
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
     }
+
+    public String toString() {
+        // just return description for testing
+        return this.description;
+    }
 }

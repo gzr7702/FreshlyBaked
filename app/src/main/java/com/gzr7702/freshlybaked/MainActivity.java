@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
-        Log.v("MainActivity", "onLoadFinished()");
+        //Log.v("MainActivity", "data: " + data.toString());
         mDataset = new String[100];
         for (int i = 0; i < mDataset.length; i++) {
             mDataset[i] = "Recipe " + String.valueOf(i);

@@ -38,4 +38,9 @@ public class Ingredient {
     public void setMeasure(String measure) {
         this.measure = measure;
     }
+
+    public String toString() {
+        // just return ingredient itself for testing
+        return this.ingredient;
+    }
 }
