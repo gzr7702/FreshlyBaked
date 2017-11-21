@@ -11,12 +11,15 @@ public class Recipe {
     private String servings;
     private ArrayList<Ingredient> ingredientList;
     private ArrayList<Instruction> instructionist;
+    private String imageUrl;
 
-    public Recipe(String name, String servings, ArrayList<Ingredient> ingredientList, ArrayList<Instruction> instructionList) {
+    public Recipe(String name, String servings, ArrayList<Ingredient> ingredientList,
+                  ArrayList<Instruction> instructionList, String imageUrl) {
         this.name = name;
         this.ingredientList = ingredientList;
         this.instructionist = instructionList;
         this.servings = servings;
+        this.imageUrl = imageUrl;
     }
 
     public String getName() {
@@ -25,6 +28,10 @@ public class Recipe {
 
     public String getServings() {
         return this.servings;
+    }
+
+    public String getImageUrl() {
+        return this.imageUrl;
     }
 
     public void setName(String name) {

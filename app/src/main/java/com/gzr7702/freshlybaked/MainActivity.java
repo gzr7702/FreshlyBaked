@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,8 +14,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gzr7702.freshlybaked.data.Recipe;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -77,11 +74,7 @@ public class MainActivity extends AppCompatActivity
         loadingIndicator.setVisibility(View.GONE);
 
         Log.v("MainActivity", "data: " + data.toString());
-        mDataset = new String[100];
-        for (int i = 0; i < mDataset.length; i++) {
-            mDataset[i] = "Recipe " + String.valueOf(i);
-        }
-        mAdapter = new MainListAdapter(mDataset);
+        mAdapter = new MainListAdapter(data, this);
         mRecyclerView.setAdapter(mAdapter);
     }
 

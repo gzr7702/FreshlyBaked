@@ -10,15 +10,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gzr7702.freshlybaked.data.Recipe;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
 /**
  * Created by rob on 10/12/17.
  */
 
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHolder> {
-    private String[] mDataset;
+    private List<Recipe> mRecipeList;
+    private Context mContext;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         public View recipeView;
         public TextView recipeText;
         public ImageView recipeImage;
@@ -26,13 +31,14 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         public ViewHolder(CardView view) {
             super(view);
             recipeView = view;
-            recipeText = (TextView) view.findViewById(R.id.recipe_row_text);
-            recipeImage = (ImageView) view.findViewById(R.id.recipe_row_image);
+            recipeText = view.findViewById(R.id.recipe_row_text);
+            recipeImage = view.findViewById(R.id.recipe_row_image);
         }
     }
 
-    public MainListAdapter(String[] myDataset) {
-        mDataset = myDataset;
+    public MainListAdapter(List<Recipe> recipeList, Context context) {
+        mRecipeList = recipeList;
+        mContext = context;
     }
 
     @Override
@@ -47,8 +53,21 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(MainListAdapter.ViewHolder holder, int position) {
-        holder.recipeText.setText(mDataset[position]);
-        holder.recipeImage.setImageResource(R.drawable.cake);
+        String recipeName = mRecipeList.get(position).getName();
+        holder.recipeText.setText(recipeName);
+
+        String imageUrl = mRecipeList.get(position).getImageUrl();
+
+        // So we don't send and empty URL to picasso
+        if (imageUrl.isEmpty()) {
+            imageUrl = null;
+        }
+
+        Picasso.with(mContext)
+                .load(imageUrl)
+                .placeholder(R.drawable.cake)
+                .into(holder.recipeImage);
+
 
         holder.recipeView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +82,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mRecipeList.size();
     }
 }
 

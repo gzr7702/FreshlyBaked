@@ -113,6 +113,7 @@ public class RecipeLoader extends AsyncTaskLoader<List<Recipe>> {
                 String servings = recipe.getString("servings");
                 ArrayList<Ingredient> ingredientArray = new ArrayList<>();
                 ArrayList<Instruction> instructionArray = new ArrayList<>();
+                String imageUrl = recipe.getString("image");
 
                 // populate ingredients array
                 JSONArray ingredientJsonArray = recipe.getJSONArray("ingredients");
@@ -125,6 +126,7 @@ public class RecipeLoader extends AsyncTaskLoader<List<Recipe>> {
 
                 // populate instructions array
                 JSONArray instructionsJsonArray = recipe.getJSONArray("steps");
+                //Log.v(LOG_TAG, "instructions Array " + instructionsJsonArray.toString());
                 for (int k = 0; k < instructionsJsonArray.length(); k++) {
                     //create Ingredient object, at to ingredient array
                     String shortDescription = instructionsJsonArray.getJSONObject(k).getString("shortDescription");
@@ -134,13 +136,16 @@ public class RecipeLoader extends AsyncTaskLoader<List<Recipe>> {
                     instructionArray.add(new Instruction(shortDescription, regularDescription, videoUrl, thumbnailUrl));
                 }
 
-                recipeList.add(new Recipe(name, servings, ingredientArray, instructionArray));
+                recipeList.add(new Recipe(name, servings, ingredientArray, instructionArray, imageUrl));
             }
         } else {
             // TODO: deal with no data
             Log.v(LOG_TAG, "No data found");
         }
 
+        for(Recipe currentRecipe : recipeList) {
+            Log.v(LOG_TAG, currentRecipe.toString());
+        }
         return recipeList;
     }
 
