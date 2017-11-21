@@ -125,7 +125,6 @@ public class RecipeLoader extends AsyncTaskLoader<List<Recipe>> {
 
                 // populate instructions array
                 JSONArray instructionsJsonArray = recipe.getJSONArray("steps");
-                //Log.v(LOG_TAG, "instructions Array " + instructionsJsonArray.toString());
                 for (int k = 0; k < instructionsJsonArray.length(); k++) {
                     //create Ingredient object, at to ingredient array
                     String shortDescription = instructionsJsonArray.getJSONObject(k).getString("shortDescription");
@@ -134,9 +133,8 @@ public class RecipeLoader extends AsyncTaskLoader<List<Recipe>> {
                     String thumbnailUrl = instructionsJsonArray.getJSONObject(k).getString("thumbnailURL");
                     instructionArray.add(new Instruction(shortDescription, regularDescription, videoUrl, thumbnailUrl));
                 }
-                Log.v(LOG_TAG, instructionArray.toString());
 
-                //recipeList.add(new Recipe());
+                recipeList.add(new Recipe(name, servings, ingredientArray, instructionArray));
             }
         } else {
             // TODO: deal with no data

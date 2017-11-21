@@ -50,4 +50,9 @@ public class Recipe {
     public void setInstructionist(ArrayList<Instruction> instructionist) {
         this.instructionist = instructionist;
     }
+
+    public String toString() {
+        // just return description for testing
+        return "Recipe " + this.name + " that serves " + this.servings;
+    }
 }
