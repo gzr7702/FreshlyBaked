@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.gzr7702.freshlybaked.data.Recipe;
 
@@ -26,12 +27,14 @@ public class MainActivity extends AppCompatActivity
     private TextView mEmptyStateTextView;
     private static final int RECIPE_LOADER_ID = 1;
 
-    private String[] mDataset;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(getTitle());
 
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
 
