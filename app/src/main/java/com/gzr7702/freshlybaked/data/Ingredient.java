@@ -1,10 +1,13 @@
 package com.gzr7702.freshlybaked.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by rob on 10/22/17.
  */
 
-public class Ingredient {
+public class Ingredient implements Parcelable {
     private int quantity;
     private String measure;
     private String ingredient;
@@ -13,6 +16,12 @@ public class Ingredient {
         this.quantity = quantity;
         this.measure = measure;
         this.ingredient = ingredient;
+    }
+
+    public Ingredient(Parcel parcel) {
+        quantity = parcel.readInt();
+        measure = parcel.readString();
+        ingredient = parcel.readString();
     }
 
     public String getIngredient() {
@@ -43,4 +52,27 @@ public class Ingredient {
         // just return ingredient itself for testing
         return this.ingredient;
     }
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(quantity);
+        dest.writeString(measure);
+        dest.writeString(ingredient);
+    }
+
+    public static final Parcelable.Creator<Instruction> CREATOR
+            = new Parcelable.Creator<Instruction>() {
+        public Instruction createFromParcel(Parcel in) {
+            return new Instruction(in);
+        }
+
+        public Instruction[] newArray(int size) {
+            return new Instruction[size];
+        }
+    };
 }

@@ -1,25 +1,33 @@
 package com.gzr7702.freshlybaked.data;
 
-import java.util.ArrayList;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 
 /**
  * Created by rob on 10/19/17.
  */
 
-public class Recipe {
+public class Recipe implements Parcelable {
     private String name;
     private String servings;
-    private ArrayList<Ingredient> ingredientList;
-    private ArrayList<Instruction> instructionist;
+    private Ingredient[] ingredientList;
+    private Instruction[] instructionList;
     private String imageUrl;
 
-    public Recipe(String name, String servings, ArrayList<Ingredient> ingredientList,
-                  ArrayList<Instruction> instructionList, String imageUrl) {
+    public Recipe(String name, String servings, Ingredient[] ingredientList,
+                  Instruction[] instructionList, String imageUrl) {
         this.name = name;
         this.ingredientList = ingredientList;
-        this.instructionist = instructionList;
+        this.instructionList = instructionList;
         this.servings = servings;
         this.imageUrl = imageUrl;
+    }
+
+    public Recipe(Parcel parcel) {
+        name = parcel.readString();
+        servings = parcel.readString();
+        imageUrl = parcel.readString();
     }
 
     public String getName() {
@@ -42,24 +50,49 @@ public class Recipe {
         this.servings = servings;
     }
 
-    public ArrayList<Ingredient> getIngredientList() {
+    public Ingredient[] getIngredientList() {
         return ingredientList;
     }
 
-    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
+    public void setIngredientList(Ingredient[] ingredientList) {
         this.ingredientList = ingredientList;
     }
 
-    public ArrayList<Instruction> getInstructionist() {
-        return instructionist;
+    public Instruction[] getInstructionist() {
+        return instructionList;
     }
 
-    public void setInstructionist(ArrayList<Instruction> instructionist) {
-        this.instructionist = instructionist;
+    public void setInstructionist(Instruction[] instructionist) {
+        this.instructionList = instructionist;
     }
 
     public String toString() {
         // just return description for testing
         return "Recipe " + this.name + " that serves " + this.servings;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeParcelableArray(ingredientList, 0);
+        dest.writeParcelableArray(instructionList, 0);
+        dest.writeString(servings);
+        dest.writeString(imageUrl);
+    }
+
+    public static final Parcelable.Creator<Instruction> CREATOR
+            = new Parcelable.Creator<Instruction>() {
+        public Instruction createFromParcel(Parcel in) {
+            return new Instruction(in);
+        }
+
+        public Instruction[] newArray(int size) {
+            return new Instruction[size];
+        }
+    };
 }

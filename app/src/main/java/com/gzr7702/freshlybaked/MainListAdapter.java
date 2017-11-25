@@ -74,6 +74,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, RecipeActivity.class);
+                //intent.putExtra();
 
                 context.startActivity(intent);
             }

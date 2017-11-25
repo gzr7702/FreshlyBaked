@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public Loader<List<Recipe>> onCreateLoader(int id, Bundle args) {
-        Log.v("MainActivity", "onCreateLoader()");
         return new RecipeLoader(this);
     }
 
@@ -76,7 +75,6 @@ public class MainActivity extends AppCompatActivity
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
-        Log.v("MainActivity", "data: " + data.toString());
         mAdapter = new MainListAdapter(data, this);
         mRecyclerView.setAdapter(mAdapter);
     }

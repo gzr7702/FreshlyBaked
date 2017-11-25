@@ -1,10 +1,13 @@
 package com.gzr7702.freshlybaked.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by rob on 10/22/17.
  */
 
-public class Instruction {
+public class Instruction implements Parcelable {
     private String shortDescription;
     private String description;
     private String videoUrl;
@@ -15,6 +18,13 @@ public class Instruction {
         this.description = description;
         this.videoUrl = videoUrl;
         this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public Instruction(Parcel parcel) {
+        shortDescription = parcel.readString();
+        description = parcel.readString();
+        videoUrl = parcel.readString();
+        thumbnailUrl = parcel.readString();
     }
 
     public String getShortDescription() {
@@ -53,4 +63,29 @@ public class Instruction {
         // just return description for testing
         return this.description;
     }
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(shortDescription);
+        dest.writeString(description);
+        dest.writeString(videoUrl);
+        dest.writeString(thumbnailUrl);
+    }
+
+    public static final Parcelable.Creator<Instruction> CREATOR
+            = new Parcelable.Creator<Instruction>() {
+        public Instruction createFromParcel(Parcel in) {
+            return new Instruction(in);
+        }
+
+        public Instruction[] newArray(int size) {
+            return new Instruction[size];
+        }
+    };
+
 }
