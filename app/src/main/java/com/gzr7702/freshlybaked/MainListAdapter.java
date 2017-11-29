@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gzr7702.freshlybaked.data.Ingredient;
+import com.gzr7702.freshlybaked.data.Instruction;
 import com.gzr7702.freshlybaked.data.Recipe;
 import com.squareup.picasso.Picasso;
 
@@ -52,7 +55,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(MainListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final MainListAdapter.ViewHolder holder, final int position) {
         String recipeName = mRecipeList.get(position).getName();
         holder.recipeText.setText(recipeName);
 
@@ -74,7 +77,13 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, RecipeActivity.class);
-                //intent.putExtra();
+                for (Ingredient ing: mRecipeList.get(position).getIngredientList()) {
+                    Log.v("MainListAdapter", ing.toString());
+                }
+                for (Instruction inst: mRecipeList.get(position).getInstructionList()) {
+                    Log.v("MainListAdapter", inst.toString());
+                }
+                intent.putExtra("Recipe", mRecipeList.get(position));
 
                 context.startActivity(intent);
             }

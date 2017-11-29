@@ -27,6 +27,8 @@ public class Recipe implements Parcelable {
     public Recipe(Parcel parcel) {
         name = parcel.readString();
         servings = parcel.readString();
+        ingredientList = parcel.createTypedArray(Ingredient.CREATOR);
+        instructionList = parcel.createTypedArray(Instruction.CREATOR);
         imageUrl = parcel.readString();
     }
 
@@ -58,7 +60,7 @@ public class Recipe implements Parcelable {
         this.ingredientList = ingredientList;
     }
 
-    public Instruction[] getInstructionist() {
+    public Instruction[] getInstructionList() {
         return instructionList;
     }
 
@@ -79,20 +81,20 @@ public class Recipe implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeParcelableArray(ingredientList, 0);
-        dest.writeParcelableArray(instructionList, 0);
+        dest.writeTypedArray(ingredientList, 0);
+        dest.writeTypedArray(instructionList, 0);
         dest.writeString(servings);
         dest.writeString(imageUrl);
     }
 
-    public static final Parcelable.Creator<Instruction> CREATOR
-            = new Parcelable.Creator<Instruction>() {
-        public Instruction createFromParcel(Parcel in) {
-            return new Instruction(in);
+    public static final Parcelable.Creator<Recipe> CREATOR
+            = new Parcelable.Creator<Recipe>() {
+        public Recipe createFromParcel(Parcel in) {
+            return new Recipe(in);
         }
 
-        public Instruction[] newArray(int size) {
-            return new Instruction[size];
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
         }
     };
 }

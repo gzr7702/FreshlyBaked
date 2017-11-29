@@ -50,7 +50,7 @@ public class Ingredient implements Parcelable {
 
     public String toString() {
         // just return ingredient itself for testing
-        return this.ingredient;
+        return this.ingredient + " " + this.measure + " " + this.quantity;
     }
 
     @Override
@@ -65,14 +65,14 @@ public class Ingredient implements Parcelable {
         dest.writeString(ingredient);
     }
 
-    public static final Parcelable.Creator<Instruction> CREATOR
-            = new Parcelable.Creator<Instruction>() {
-        public Instruction createFromParcel(Parcel in) {
-            return new Instruction(in);
+    public static final Parcelable.Creator<Ingredient> CREATOR
+            = new Parcelable.Creator<Ingredient>() {
+        public Ingredient createFromParcel(Parcel in) {
+            return new Ingredient(in);
         }
 
-        public Instruction[] newArray(int size) {
-            return new Instruction[size];
+        public Ingredient[] newArray(int size) {
+            return new Ingredient[size];
         }
     };
 }
