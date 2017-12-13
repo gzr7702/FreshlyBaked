@@ -77,12 +77,14 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, RecipeActivity.class);
+                Log.v("MainListAdapter", mRecipeList.get(position).getIngredientList().toString());
                 for (Ingredient ing: mRecipeList.get(position).getIngredientList()) {
                     Log.v("MainListAdapter", ing.toString());
                 }
                 for (Instruction inst: mRecipeList.get(position).getInstructionList()) {
                     Log.v("MainListAdapter", inst.toString());
                 }
+                Log.v("MainListAdapter", mRecipeList.get(position).toString());
                 intent.putExtra("Recipe", mRecipeList.get(position));
 
                 context.startActivity(intent);

@@ -110,38 +110,72 @@ public class RecipeLoader extends AsyncTaskLoader<List<Recipe>> {
                 JSONObject recipe = recipeJson.getJSONObject(i);
 
                 String name = recipe.getString("name");
+                if (name == null) {
+                    name = "Some amazing dessert";
+                }
+
                 String servings = recipe.getString("servings");
+                if (servings == null) {
+                    name = "Feeds a lot of people";
+                }
+
                 ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
                 ArrayList<Instruction> instructionArrayList = new ArrayList<>();
+                // We handle no image later when we use it
                 String imageUrl = recipe.getString("image");
 
                 // populate ingredients array
                 JSONArray ingredientJsonArray = recipe.getJSONArray("ingredients");
+                if (ingredientJsonArray == null) {
+                    //TODO: make a an array w/one ingredient that says "no ingredients"
+                    Log.v(LOG_TAG, "Ingredients are null");
+                }
+
                 for (int j = 0; j < ingredientJsonArray.length(); j++) {
                     String ingredientString = ingredientJsonArray.getJSONObject(j).getString("ingredient");
+                    if (ingredientString == null) {
+                        ingredientString = "Ingredient is missing for this step";
+                    }
+
                     int quantityString = ingredientJsonArray.getJSONObject(j).getInt("quantity");
                     String measureString = ingredientJsonArray.getJSONObject(j).getString("measure");
+                    if (measureString == null) {
+                        measureString = "Measure not provided";
+                    }
                     ingredientArrayList.add(new Ingredient(quantityString, measureString, ingredientString));
                 }
 
                 // populate instructions array
                 JSONArray instructionsJsonArray = recipe.getJSONArray("steps");
-                //Log.v(LOG_TAG, "instructions Array " + instructionsJsonArray.toString());
+                if (instructionsJsonArray == null) {
+                    //TODO: make a an array w/one instruction that says "no instructions"
+                    Log.v(LOG_TAG, "Instructions are null");
+                }
                 for (int k = 0; k < instructionsJsonArray.length(); k++) {
                     //create Ingredient object, at to ingredient array
                     String shortDescription = instructionsJsonArray.getJSONObject(k).getString("shortDescription");
+                    if (shortDescription == null) {
+                        shortDescription = "No description available";
+                    }
+
                     String regularDescription = instructionsJsonArray.getJSONObject(k).getString("description");
+                    if (regularDescription == null) {
+                        regularDescription = "No description available";
+                    }
                     String videoUrl = instructionsJsonArray.getJSONObject(k).getString("videoURL");
+                    if (videoUrl == null) {
+                        videoUrl = "";
+                    }
+
                     String thumbnailUrl = instructionsJsonArray.getJSONObject(k).getString("thumbnailURL");
+                    if (thumbnailUrl == null) {
+                        thumbnailUrl = "";
+                    }
+
                     instructionArrayList.add(new Instruction(shortDescription, regularDescription, videoUrl, thumbnailUrl));
                 }
 
-                Ingredient[] ingredientArray = new Ingredient[ingredientArrayList.size()];
-                ingredientArray = ingredientArrayList.toArray(ingredientArray);
-                Instruction[] instructionArray = new  Instruction[instructionArrayList.size()];
-                instructionArray =  instructionArrayList.toArray(instructionArray);
-
-                recipeList.add(new Recipe(name, servings, ingredientArray, instructionArray, imageUrl));
+                recipeList.add(new Recipe(name, servings, ingredientArrayList, instructionArrayList, imageUrl));
             }
         } else {
             // TODO: deal with no data

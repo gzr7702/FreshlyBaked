@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,13 @@ public class RecipeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
+        // Grab the parcelable Recipe
+        Bundle data = getIntent().getExtras();
+        mRecipe = data.getParcelable("Recipe");
+        Log.v("RecipeActivity", "recipe: " + mRecipe);
+
+        mInstructionList = mRecipe.getInstructionList();
+
         View recyclerView = findViewById(R.id.recipestep_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
@@ -58,13 +66,6 @@ public class RecipeActivity extends AppCompatActivity {
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
-
-        // Grab the parcelable Recipe
-        Intent intent = getIntent();
-        mRecipe = intent.getParcelableExtra("Recipe");
-
-        // Convert ingredient list into ArrayList
-        mInstructionList = new ArrayList<>(Arrays.asList(mRecipe.getInstructionList()));
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -77,6 +78,7 @@ public class RecipeActivity extends AppCompatActivity {
         private final List<Instruction> mValues;
 
         public SimpleItemRecyclerViewAdapter(List<Instruction> items) {
+            Log.v("RecipeActivity", "In simpleitmeRecyclerViewAdapter");
             mValues = items;
         }
 
@@ -92,6 +94,7 @@ public class RecipeActivity extends AppCompatActivity {
             holder.mItem = mValues.get(position);
             final String stepNumber = Integer.toString(position+1);
             holder.mStepView.setText(stepNumber);
+
             holder.mDescriptionView.setText(mValues.get(position).getShortDescription());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +121,7 @@ public class RecipeActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
+            Log.v("RecipeActivity", "In getItemCount");
             return mValues.size();
         }
 

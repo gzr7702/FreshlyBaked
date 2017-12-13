@@ -20,53 +20,16 @@ public class Instruction implements Parcelable {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public Instruction(Parcel parcel) {
-        shortDescription = parcel.readString();
-        description = parcel.readString();
-        videoUrl = parcel.readString();
-        thumbnailUrl = parcel.readString();
-    }
-
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
-
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-    }
-
-    public String toString() {
-        // just return description for testing
-        return this.description;
+    protected Instruction(Parcel in) {
+        shortDescription = in.readString();
+        description = in.readString();
+        videoUrl = in.readString();
+        thumbnailUrl = in.readString();
     }
 
     @Override
     public int describeContents() {
-        return hashCode();
+        return 0;
     }
 
     @Override
@@ -77,15 +40,25 @@ public class Instruction implements Parcelable {
         dest.writeString(thumbnailUrl);
     }
 
-    public static final Parcelable.Creator<Instruction> CREATOR
-            = new Parcelable.Creator<Instruction>() {
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Instruction> CREATOR = new Parcelable.Creator<Instruction>() {
+        @Override
         public Instruction createFromParcel(Parcel in) {
             return new Instruction(in);
         }
 
+        @Override
         public Instruction[] newArray(int size) {
             return new Instruction[size];
         }
     };
 
+    public String getShortDescription() {
+        return this.shortDescription;
+    }
+
+    public String toString() {
+        String instr = "Description: " + this.description + " video: " + this.videoUrl + " thumbnail: " + this.thumbnailUrl;
+        return instr;
+    }
 }

@@ -18,44 +18,16 @@ public class Ingredient implements Parcelable {
         this.ingredient = ingredient;
     }
 
-    public Ingredient(Parcel parcel) {
-        quantity = parcel.readInt();
-        measure = parcel.readString();
-        ingredient = parcel.readString();
-    }
 
-    public String getIngredient() {
-        return ingredient;
-    }
-
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getMeasure() {
-        return measure;
-    }
-
-    public void setMeasure(String measure) {
-        this.measure = measure;
-    }
-
-    public String toString() {
-        // just return ingredient itself for testing
-        return this.ingredient + " " + this.measure + " " + this.quantity;
+    protected Ingredient(Parcel in) {
+        quantity = in.readInt();
+        measure = in.readString();
+        ingredient = in.readString();
     }
 
     @Override
     public int describeContents() {
-        return hashCode();
+        return 0;
     }
 
     @Override
@@ -65,14 +37,21 @@ public class Ingredient implements Parcelable {
         dest.writeString(ingredient);
     }
 
-    public static final Parcelable.Creator<Ingredient> CREATOR
-            = new Parcelable.Creator<Ingredient>() {
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Ingredient> CREATOR = new Parcelable.Creator<Ingredient>() {
+        @Override
         public Ingredient createFromParcel(Parcel in) {
             return new Ingredient(in);
         }
 
+        @Override
         public Ingredient[] newArray(int size) {
             return new Ingredient[size];
         }
     };
+
+    public String toString() {
+        String ing = "ingredient: " + this.ingredient + " measure: " + this.measure + " quantitiy: " + this.quantity;
+        return ing;
+    }
 }
