@@ -18,7 +18,6 @@ import com.gzr7702.freshlybaked.data.Instruction;
 import com.gzr7702.freshlybaked.data.Recipe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -44,13 +43,15 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipestep_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
-
         // Grab the parcelable Recipe
         Bundle data = getIntent().getExtras();
         mRecipe = data.getParcelable("Recipe");
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(mRecipe.getName());
+
+
         Log.v("RecipeActivity", "recipe: " + mRecipe);
 
         mInstructionList = mRecipe.getInstructionList();

@@ -12,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gzr7702.freshlybaked.data.Ingredient;
-import com.gzr7702.freshlybaked.data.Instruction;
 import com.gzr7702.freshlybaked.data.Recipe;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,12 +29,14 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View recipeView;
         public TextView recipeText;
+        public TextView servingsText;
         public ImageView recipeImage;
 
         public ViewHolder(CardView view) {
             super(view);
             recipeView = view;
-            recipeText = view.findViewById(R.id.recipe_row_text);
+            recipeText = view.findViewById(R.id.recipe_name_text);
+            servingsText = view.findViewById(R.id.serving_row_text);
             recipeImage = view.findViewById(R.id.recipe_row_image);
         }
     }
@@ -59,6 +61,10 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         String recipeName = mRecipeList.get(position).getName();
         holder.recipeText.setText(recipeName);
 
+        String servings = mRecipeList.get(position).getServings();
+        String servingString = "Serves " + servings + " people";
+        holder.servingsText.setText(servingString);
+
         String imageUrl = mRecipeList.get(position).getImageUrl();
 
         // So we don't send and empty URL to picasso
@@ -78,13 +84,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
                 Context context = v.getContext();
                 Intent intent = new Intent(context, RecipeActivity.class);
                 Log.v("MainListAdapter", mRecipeList.get(position).getIngredientList().toString());
-                for (Ingredient ing: mRecipeList.get(position).getIngredientList()) {
-                    Log.v("MainListAdapter", ing.toString());
-                }
-                for (Instruction inst: mRecipeList.get(position).getInstructionList()) {
-                    Log.v("MainListAdapter", inst.toString());
-                }
-                Log.v("MainListAdapter", mRecipeList.get(position).toString());
+
                 intent.putExtra("Recipe", mRecipeList.get(position));
 
                 context.startActivity(intent);

@@ -74,6 +74,10 @@ public class Recipe implements Parcelable {
         return this.name;
     }
 
+    public String getServings() {
+        return this.servings;
+    }
+
     public String getImageUrl() {
         return this.imageUrl;
     }

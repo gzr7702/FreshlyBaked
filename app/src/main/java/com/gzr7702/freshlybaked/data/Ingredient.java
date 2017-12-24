@@ -51,7 +51,13 @@ public class Ingredient implements Parcelable {
     };
 
     public String toString() {
-        String ing = "ingredient: " + this.ingredient + " measure: " + this.measure + " quantitiy: " + this.quantity;
-        return ing;
+        String ingredientString;
+        String lowerMeasure = this.measure.toLowerCase();
+        if (lowerMeasure.equals("unit")) {
+            ingredientString = this.quantity + " " + this.ingredient;
+        } else {
+            ingredientString = this.quantity + lowerMeasure + " " + this.ingredient;
+        }
+        return ingredientString;
     }
 }
