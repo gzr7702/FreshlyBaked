@@ -21,19 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An activity representing a list of Recipe. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link RecipeStepDetailActivity} representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
+ * An activity that contains a list of Instructions for one particular recipe. It contains its own
+ * RecyclerView
  */
-public class RecipeActivity extends AppCompatActivity {
 
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
-     */
+public class InstructionListActivity extends AppCompatActivity {
+
     private boolean mTwoPane;
     private Recipe mRecipe;
     private ArrayList<Instruction> mInstructionList;
@@ -41,7 +34,7 @@ public class RecipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipestep_list);
+        setContentView(R.layout.activity_instruction_list);
 
         // Grab the parcelable Recipe
         Bundle data = getIntent().getExtras();
@@ -52,7 +45,7 @@ public class RecipeActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(mRecipe.getName());
 
 
-        Log.v("RecipeActivity", "recipe: " + mRecipe);
+        Log.v("InstructionListActivity", "recipe: " + mRecipe);
 
         mInstructionList = mRecipe.getInstructionList();
 
@@ -79,14 +72,14 @@ public class RecipeActivity extends AppCompatActivity {
         private final List<Instruction> mValues;
 
         public SimpleItemRecyclerViewAdapter(List<Instruction> items) {
-            Log.v("RecipeActivity", "In simpleitmeRecyclerViewAdapter");
+            Log.v("InstructionListActivity", "In simpleitmeRecyclerViewAdapter");
             mValues = items;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.recipestep_list_content, parent, false);
+                    .inflate(R.layout.instruction_row, parent, false);
             return new ViewHolder(view);
         }
 
@@ -103,16 +96,16 @@ public class RecipeActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(RecipeStepDetailFragment.ARG_ITEM_ID, stepNumber);
-                        RecipeStepDetailFragment fragment = new RecipeStepDetailFragment();
+                        arguments.putString(InstructionDetailFragment.ARG_ITEM_ID, stepNumber);
+                        InstructionDetailFragment fragment = new InstructionDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.recipestep_detail_container, fragment)
                                 .commit();
                     } else {
                         Context context = v.getContext();
-                        Intent intent = new Intent(context, RecipeStepDetailActivity.class);
-                        intent.putExtra(RecipeStepDetailFragment.ARG_ITEM_ID, stepNumber);
+                        Intent intent = new Intent(context, InstructionDetailActivity.class);
+                        intent.putExtra(InstructionDetailFragment.ARG_ITEM_ID, stepNumber);
 
                         context.startActivity(intent);
                     }
@@ -122,7 +115,7 @@ public class RecipeActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            Log.v("RecipeActivity", "In getItemCount");
+            Log.v("InstructionListActivity", "In getItemCount");
             return mValues.size();
         }
 
@@ -135,8 +128,8 @@ public class RecipeActivity extends AppCompatActivity {
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mStepView = (TextView) view.findViewById(R.id.id);
-                mDescriptionView = (TextView) view.findViewById(R.id.content);
+                mStepView = (TextView) view.findViewById(R.id.step_number_text);
+                mDescriptionView = (TextView) view.findViewById(R.id.instruction_text);
             }
 
             @Override

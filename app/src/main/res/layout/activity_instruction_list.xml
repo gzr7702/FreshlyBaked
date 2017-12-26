@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- This holds the instruction list for a single recipe-->
+
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.gzr7702.freshlybaked.RecipeActivity">
+    tools:context="com.gzr7702.freshlybaked.InstructionListActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -28,7 +31,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/recipestep_list"/>
+        <include layout="@layout/instruction_list"/>
     </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

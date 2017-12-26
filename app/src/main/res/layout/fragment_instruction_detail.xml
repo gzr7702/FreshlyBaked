@@ -1,3 +1,6 @@
+
+<!-- Detail of single Instruction -->
+
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           android:id="@+id/recipestep_detail"
@@ -6,4 +9,4 @@
           android:layout_height="match_parent"
           android:padding="16dp"
           android:textIsSelectable="true"
-          tools:context="com.gzr7702.freshlybaked.RecipeStepDetailFragment"/>
+          tools:context="com.gzr7702.freshlybaked.InstructionDetailFragment"/>

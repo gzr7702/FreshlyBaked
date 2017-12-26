@@ -11,15 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gzr7702.freshlybaked.data.Ingredient;
 import com.gzr7702.freshlybaked.data.Recipe;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by rob on 10/12/17.
+ * Adapter used by the Main list of recipes.
  */
 
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHolder> {
@@ -82,7 +80,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent intent = new Intent(context, RecipeActivity.class);
+                Intent intent = new Intent(context, InstructionListActivity.class);
                 Log.v("MainListAdapter", mRecipeList.get(position).getIngredientList().toString());
 
                 intent.putExtra("Recipe", mRecipeList.get(position));

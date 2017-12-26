@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Fetch the results of a query based on Author, Title, Publish Date
+ * Fetch all recipes from the RESTful endpoint, parse the JSON, and create objects.
  */
 
 public class RecipeLoader extends AsyncTaskLoader<List<Recipe>> {

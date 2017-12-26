@@ -11,17 +11,15 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
 /**
- * An activity representing a single RecipeStep detail screen. This
- * activity is only used narrow width devices. On tablet-size devices,
- * item details are presented side-by-side with a list of items
- * in a {@link RecipeActivity}.
+ * An activity representing a single Instruction detail screen.
  */
-public class RecipeStepDetailActivity extends AppCompatActivity {
+
+public class InstructionDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipestep_detail);
+        setContentView(R.layout.activity_instruction_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,9 +51,9 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(RecipeStepDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(RecipeStepDetailFragment.ARG_ITEM_ID));
-            RecipeStepDetailFragment fragment = new RecipeStepDetailFragment();
+            arguments.putString(InstructionDetailFragment.ARG_ITEM_ID,
+                    getIntent().getStringExtra(InstructionDetailFragment.ARG_ITEM_ID));
+            InstructionDetailFragment fragment = new InstructionDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.recipestep_detail_container, fragment)
@@ -73,7 +71,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, RecipeActivity.class));
+            navigateUpTo(new Intent(this, InstructionListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

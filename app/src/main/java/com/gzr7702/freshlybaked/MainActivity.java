@@ -17,6 +17,11 @@ import com.gzr7702.freshlybaked.data.Recipe;
 
 import java.util.List;
 
+/*
+    This is the main activity and the list of all available recipes. It utilizes the
+    RecipeLoader to fetch data and the MainListAdapter to handle its RecyclerView
+ */
+
 public class MainActivity extends AppCompatActivity
     implements LoaderManager.LoaderCallbacks<List<Recipe>> {
 

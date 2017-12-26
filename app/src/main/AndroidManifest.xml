@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecipeActivity"
+            android:name=".InstructionListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -30,13 +30,13 @@
                 android:value="com.gzr7702.freshlybaked.MainActivity"/>
         </activity>
         <activity
-            android:name=".RecipeStepDetailActivity"
+            android:name=".InstructionDetailActivity"
             android:label="@string/title_recipestep_detail"
-            android:parentActivityName=".RecipeActivity"
+            android:parentActivityName=".InstructionListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.gzr7702.freshlybaked.RecipeActivity"/>
+                android:value="com.gzr7702.freshlybaked.InstructionListActivity"/>
         </activity>
     </application>
 

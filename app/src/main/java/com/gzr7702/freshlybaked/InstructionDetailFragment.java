@@ -12,12 +12,10 @@ import android.widget.TextView;
 import com.gzr7702.freshlybaked.data.DummyContent;
 
 /**
- * A fragment representing a single RecipeStep detail screen.
- * This fragment is either contained in a {@link RecipeActivity}
- * in two-pane mode (on tablets) or a {@link RecipeStepDetailActivity}
- * on handsets.
+ * Fragment that lives within the InstructionDetailActivity.
  */
-public class RecipeStepDetailFragment extends Fragment {
+
+public class InstructionDetailFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -33,7 +31,7 @@ public class RecipeStepDetailFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public RecipeStepDetailFragment() {
+    public InstructionDetailFragment() {
     }
 
     @Override
@@ -57,7 +55,7 @@ public class RecipeStepDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.recipestep_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_instruction_detail, container, false);
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {

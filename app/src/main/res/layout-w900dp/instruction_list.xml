@@ -1,3 +1,6 @@
+
+<!-- Holds RecyclerView of Instructions. This one is for tablets -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
@@ -9,13 +12,7 @@
               android:divider="?android:attr/dividerHorizontal"
               android:orientation="horizontal"
               android:showDividers="middle"
-              tools:context="com.gzr7702.freshlybaked.RecipeActivity">
-
-    <!--
-    This layout is a two-pane layout for the Recipe
-    master/detail flow.
-    
-    -->
+              tools:context="com.gzr7702.freshlybaked.InstructionListActivity">
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
                                             xmlns:tools="http://schemas.android.com/tools"
@@ -26,8 +23,8 @@
                                             android:layout_marginLeft="16dp"
                                             android:layout_marginRight="16dp"
                                             app:layoutManager="LinearLayoutManager"
-                                            tools:context="com.gzr7702.freshlybaked.RecipeActivity"
-                                            tools:listitem="@layout/recipestep_list_content"/>
+                                            tools:context="com.gzr7702.freshlybaked.InstructionListActivity"
+                                            tools:listitem="@layout/instruction_row"/>
 
     <FrameLayout
         android:id="@+id/recipestep_detail_container"
