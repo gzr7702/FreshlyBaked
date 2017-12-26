@@ -2,7 +2,7 @@
 
 <!-- This holds the instruction list for a single recipe-->
 
-<android.support.design.widget.CoordinatorLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -25,13 +25,25 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginTop="52dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        tools:layout_editor_absoluteX="0dp">
 
-        <include layout="@layout/instruction_list"/>
-    </FrameLayout>
+        <Button
+            android:id="@+id/ingredient_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="8dp"
+            android:text="Show Ingredients" />
 
-</android.support.design.widget.CoordinatorLayout>
+        <include layout="@layout/instruction_list" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

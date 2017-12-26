@@ -16,7 +16,7 @@
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
                                             xmlns:tools="http://schemas.android.com/tools"
-                                            android:id="@+id/recipestep_list"
+                                            android:id="@+id/instruction_list"
                                             android:name="com.gzr7702.freshlybaked.RecipeStepListFragment"
                                             android:layout_width="@dimen/item_width"
                                             android:layout_height="match_parent"
@@ -27,7 +27,7 @@
                                             tools:listitem="@layout/instruction_row"/>
 
     <FrameLayout
-        android:id="@+id/recipestep_detail_container"
+        android:id="@+id/instruction_detail_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3"/>

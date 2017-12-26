@@ -1,6 +1,8 @@
 package com.gzr7702.freshlybaked;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,9 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.gzr7702.freshlybaked.data.Ingredient;
 import com.gzr7702.freshlybaked.data.Instruction;
 import com.gzr7702.freshlybaked.data.Recipe;
 
@@ -30,15 +34,49 @@ public class InstructionListActivity extends AppCompatActivity {
     private boolean mTwoPane;
     private Recipe mRecipe;
     private ArrayList<Instruction> mInstructionList;
+    private ArrayList<Ingredient> mIngredientList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instruction_list);
 
+        Button ingredientButton = (Button) findViewById(R.id.ingredient_button);
+
         // Grab the parcelable Recipe
         Bundle data = getIntent().getExtras();
         mRecipe = data.getParcelable("Recipe");
+
+        // Create a string of ingredients for the dialog
+        mIngredientList = mRecipe.getIngredientList();
+        StringBuilder sb = new StringBuilder();
+        for (Ingredient ing : mIngredientList) {
+            sb.append("- ");
+            sb.append(ing.toString());
+            sb.append("\n\n");
+        }
+
+        final String ingredientString = sb.toString();
+
+        ingredientButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        InstructionListActivity.this);
+                alertDialogBuilder.setTitle("Ingredients:");
+                alertDialogBuilder
+                        .setMessage(ingredientString)
+                        .setCancelable(false)
+                        .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, close the dialog box
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,11 +87,11 @@ public class InstructionListActivity extends AppCompatActivity {
 
         mInstructionList = mRecipe.getInstructionList();
 
-        View recyclerView = findViewById(R.id.recipestep_list);
+        View recyclerView = findViewById(R.id.instruction_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
 
-        if (findViewById(R.id.recipestep_detail_container) != null) {
+        if (findViewById(R.id.instruction_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -100,7 +138,7 @@ public class InstructionListActivity extends AppCompatActivity {
                         InstructionDetailFragment fragment = new InstructionDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.recipestep_detail_container, fragment)
+                                .replace(R.id.instruction_detail_container, fragment)
                                 .commit();
                     } else {
                         Context context = v.getContext();

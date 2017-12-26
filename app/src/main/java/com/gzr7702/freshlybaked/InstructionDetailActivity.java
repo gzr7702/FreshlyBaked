@@ -56,7 +56,7 @@ public class InstructionDetailActivity extends AppCompatActivity {
             InstructionDetailFragment fragment = new InstructionDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.recipestep_detail_container, fragment)
+                    .add(R.id.instruction_detail_container, fragment)
                     .commit();
         }
     }
