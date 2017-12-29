@@ -57,6 +57,14 @@ public class Instruction implements Parcelable {
         return this.shortDescription;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getVideoUrl() {
+        return this.videoUrl;
+    }
+
     public String toString() {
         String instr = "Description: " + this.description + " video: " + this.videoUrl + " thumbnail: " + this.thumbnailUrl;
         return instr;

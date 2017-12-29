@@ -83,7 +83,7 @@ public class InstructionListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(mRecipe.getName());
 
 
-        Log.v("InstructionListActivity", "recipe: " + mRecipe);
+        //Log.v("InstructionListActivity", "recipe: " + mRecipe);
 
         mInstructionList = mRecipe.getInstructionList();
 
@@ -110,7 +110,7 @@ public class InstructionListActivity extends AppCompatActivity {
         private final List<Instruction> mValues;
 
         public SimpleItemRecyclerViewAdapter(List<Instruction> items) {
-            Log.v("InstructionListActivity", "In simpleitmeRecyclerViewAdapter");
+            //Log.v("InstructionListActivity", "In simpleitmeRecyclerViewAdapter");
             mValues = items;
         }
 
@@ -122,7 +122,7 @@ public class InstructionListActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
+        public void onBindViewHolder(final ViewHolder holder, final int position) {
             holder.mItem = mValues.get(position);
             final String stepNumber = Integer.toString(position+1);
             holder.mStepView.setText(stepNumber);
@@ -133,17 +133,25 @@ public class InstructionListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (mTwoPane) {
+                        // TODO: pass in long description and video URL
                         Bundle arguments = new Bundle();
-                        arguments.putString(InstructionDetailFragment.ARG_ITEM_ID, stepNumber);
+                        arguments.putString("LONG_DESCRIPTION", mInstructionList.get(position).getDescription());
+                        arguments.putString("VIDEO_URL", mInstructionList.get(position).getVideoUrl());
+                        Log.v("bundle args 2: ", arguments.toString());
                         InstructionDetailFragment fragment = new InstructionDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.instruction_detail_container, fragment)
                                 .commit();
                     } else {
+                        // TODO: pass in long description and video URL
                         Context context = v.getContext();
                         Intent intent = new Intent(context, InstructionDetailActivity.class);
-                        intent.putExtra(InstructionDetailFragment.ARG_ITEM_ID, stepNumber);
+                        Bundle arguments = new Bundle();
+                        arguments.putString("LONG_DESCRIPTION", mInstructionList.get(position).getDescription());
+                        arguments.putString("VIDEO_URL", mInstructionList.get(position).getVideoUrl());
+                        Log.v("bundle args 1: ", arguments.toString());
+                        intent.putExtras(arguments);
 
                         context.startActivity(intent);
                     }
@@ -153,7 +161,6 @@ public class InstructionListActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            Log.v("InstructionListActivity", "In getItemCount");
             return mValues.size();
         }
 
