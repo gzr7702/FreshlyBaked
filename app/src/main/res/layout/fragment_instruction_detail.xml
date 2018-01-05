@@ -1,12 +1,28 @@
 
-<!-- Detail of single Instruction -->
+<!-- Fragment with detail of single Instruction -->
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/video_player"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           android:id="@+id/instruction_detail"
           style="?android:attr/textAppearanceLarge"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
           android:padding="16dp"
           android:textIsSelectable="true"
           tools:context="com.gzr7702.freshlybaked.InstructionDetailFragment"/>
+</LinearLayout>
