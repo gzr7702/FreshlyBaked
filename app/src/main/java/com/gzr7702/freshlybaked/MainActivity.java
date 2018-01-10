@@ -84,6 +84,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onLoaderReset(Loader<List<Recipe>> loader) {
-        //TODO: clear adapter here
+        loader = null;
     }
 }

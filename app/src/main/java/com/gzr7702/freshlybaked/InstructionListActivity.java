@@ -133,7 +133,6 @@ public class InstructionListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (mTwoPane) {
-                        // TODO: pass in long description and video URL
                         Bundle arguments = new Bundle();
                         arguments.putString("LONG_DESCRIPTION", mInstructionList.get(position).getDescription());
                         arguments.putString("VIDEO_URL", mInstructionList.get(position).getVideoUrl());
@@ -144,7 +143,6 @@ public class InstructionListActivity extends AppCompatActivity {
                                 .replace(R.id.instruction_detail_container, fragment)
                                 .commit();
                     } else {
-                        // TODO: pass in long description and video URL
                         Context context = v.getContext();
                         Intent intent = new Intent(context, InstructionDetailActivity.class);
                         Bundle arguments = new Bundle();

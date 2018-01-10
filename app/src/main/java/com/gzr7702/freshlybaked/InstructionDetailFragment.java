@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,8 @@ public class InstructionDetailFragment extends Fragment implements ExoPlayer.Eve
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDescription = getArguments().getString(DESCRIPTION);
+        String description = getArguments().getString(DESCRIPTION);
+        mDescription = description.replaceAll("\\d+\\.\\s", "");
         mVideoUrl = getArguments().getString(VIDEO_URL);
     }
 
@@ -64,7 +66,6 @@ public class InstructionDetailFragment extends Fragment implements ExoPlayer.Eve
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_instruction_detail, container, false);
 
-        // TODO: take out step number from description
         ((TextView) rootView.findViewById(R.id.instruction_detail)).setText(mDescription);
         return rootView;
     }
