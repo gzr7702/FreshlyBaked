@@ -64,6 +64,7 @@ public class InstructionDetailFragment extends Fragment implements ExoPlayer.Eve
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_instruction_detail, container, false);
 
+        // TODO: take out step number from description
         ((TextView) rootView.findViewById(R.id.instruction_detail)).setText(mDescription);
         return rootView;
     }
@@ -80,7 +81,9 @@ public class InstructionDetailFragment extends Fragment implements ExoPlayer.Eve
     @Override
     public void onPause() {
         super.onPause();
+        mExoPlayer.stop();
         mExoPlayer.release();
+        mExoPlayer = null;
     }
 
     private void initializePlayer(Uri mediaUri) {
@@ -90,6 +93,8 @@ public class InstructionDetailFragment extends Fragment implements ExoPlayer.Eve
             LoadControl loadControl = new DefaultLoadControl();
             mExoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
             mPlayerView.setPlayer(mExoPlayer);
+
+            // TODO: fix controls of player
 
             mExoPlayer.addListener(this);
 
@@ -101,6 +106,8 @@ public class InstructionDetailFragment extends Fragment implements ExoPlayer.Eve
             mExoPlayer.setPlayWhenReady(true);
         }
     }
+
+    // TODO: need onsavedinstancestate
 
     @Override
     public void onTimelineChanged(Timeline timeline, Object manifest) {
