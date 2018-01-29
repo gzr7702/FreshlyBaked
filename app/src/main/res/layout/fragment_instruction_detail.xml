@@ -18,7 +18,7 @@
         style="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="203dp"
-        android:gravity="bottom"
+        android:gravity="center"
         android:textIsSelectable="true"
         tools:context="com.gzr7702.freshlybaked.InstructionDetailFragment" />
 </LinearLayout>

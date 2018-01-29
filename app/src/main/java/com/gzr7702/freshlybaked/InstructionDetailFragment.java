@@ -95,12 +95,11 @@ public class InstructionDetailFragment extends Fragment implements ExoPlayer.Eve
             mExoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
             mPlayerView.setPlayer(mExoPlayer);
 
-            // TODO: fix controls of player
-
             mExoPlayer.addListener(this);
 
             // Prepare the MediaSource.
             String userAgent = Util.getUserAgent(getContext(), "FreshlyBaked");
+            // TODO: put this on a separate thread?
             MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                     getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
             mExoPlayer.prepare(mediaSource);
