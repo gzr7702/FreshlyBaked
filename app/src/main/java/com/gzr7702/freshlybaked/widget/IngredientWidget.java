@@ -1,28 +1,33 @@
-package com.gzr7702.freshlybaked;
+package com.gzr7702.freshlybaked.widget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
+
+import com.gzr7702.freshlybaked.MainActivity;
+import com.gzr7702.freshlybaked.R;
 
 /**
  * Implementation of App Widget functionality.
  */
 public class IngredientWidget extends AppWidgetProvider {
 
+    private static String LOG_TAG = "IngredientWidget";
+
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
+        Log.v(LOG_TAG, "updateAppWidget");
         Intent intent = new Intent(context, MainActivity.class);
+        //intent.setAction(IngredientService.ACTION_FETCH_RECIPES);
+        PendingIntent recipeServicePendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredient_widget);
-        views.setImageViewResource(R.id.widget_cake_image, R.drawable.cake);
-
-        PendingIntent mainAppPendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-
-        views.setOnClickPendingIntent(R.id.widget_cake_image, mainAppPendingIntent);
+        views.setOnClickPendingIntent(R.id.widget_cake_image, recipeServicePendingIntent);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
