@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Al Forno</string>
+    <string name="title_recipestep_detail">Dettaglio delle Istruzioni</string>
+    <string name="internet_unavailable_message" translatable="false">Internet non è disponabile</string>
+    <string name="ingredient_alert_title" translatable="false">Ingredienti:</string>
+    <string name="ingredient_button_text" translatable="false">Mostra Ingredienti</string>
+    <string name="ingredient__widget_close_button_text" translatable="false">Chiuda</string>
+</resources>

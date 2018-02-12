@@ -63,11 +63,12 @@ public class InstructionListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         InstructionListActivity.this);
-                alertDialogBuilder.setTitle("Ingredients:");
+
+                alertDialogBuilder.setTitle(R.string.ingredient_alert_title);
                 alertDialogBuilder
                         .setMessage(ingredientString)
                         .setCancelable(false)
-                        .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.ingredient__widget_close_button_text, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // if this button is clicked, close the dialog box
                                 dialog.cancel();

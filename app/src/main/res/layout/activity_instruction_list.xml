@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="8dp"
-            android:text="Show Ingredients" />
+            android:text="@string/ingredient_button_text" />
 
         <include layout="@layout/instruction_list" />
 
