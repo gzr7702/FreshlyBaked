@@ -22,10 +22,11 @@ public class IngredientWidgetProvider extends AppWidgetProvider {
                                 int appWidgetId) {
 
         Log.v(LOG_TAG, "updateAppWidget");
-        Intent intent = new Intent(context, MainActivity.class);
-        //intent.setAction(IngredientService.ACTION_FETCH_RECIPES);
-        //PendingIntent recipeServicePendingIntent = PendingIntent.getService(context, 0, intent, 0);
-        PendingIntent recipeServicePendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        //Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, IngredientService.class);
+        intent.setAction(IngredientService.ACTION_FETCH_RECIPES);
+        PendingIntent recipeServicePendingIntent = PendingIntent.getService(context, 0, intent, 0);
+        //PendingIntent recipeServicePendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredient_widget);
 
         views.setOnClickPendingIntent(R.id.widget_cake_image, recipeServicePendingIntent);
