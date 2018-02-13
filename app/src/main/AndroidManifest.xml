@@ -41,7 +41,7 @@
                 android:value="com.gzr7702.freshlybaked.InstructionListActivity" />
         </activity>
 
-        <receiver android:name=".widget.IngredientWidget">
+        <receiver android:name=".widget.IngredientWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -53,7 +53,8 @@
 
         <service
             android:name=".widget.IngredientService"
-            android:exported="false"></service>
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>

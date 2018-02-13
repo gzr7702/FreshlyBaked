@@ -11,10 +11,4 @@
         android:layout_gravity="center"
         android:src="@drawable/cake"/>
 
-    <ListView
-        android:id="@+id/widget_baked_good_list"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-    </ListView>
-
 </RelativeLayout>

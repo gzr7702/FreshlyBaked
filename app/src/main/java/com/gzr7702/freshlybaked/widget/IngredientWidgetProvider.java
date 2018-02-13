@@ -14,9 +14,9 @@ import com.gzr7702.freshlybaked.R;
 /**
  * Implementation of App Widget functionality.
  */
-public class IngredientWidget extends AppWidgetProvider {
+public class IngredientWidgetProvider extends AppWidgetProvider {
 
-    private static String LOG_TAG = "IngredientWidget";
+    private static String LOG_TAG = "IngredientWidgetProvider";
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
@@ -24,9 +24,10 @@ public class IngredientWidget extends AppWidgetProvider {
         Log.v(LOG_TAG, "updateAppWidget");
         Intent intent = new Intent(context, MainActivity.class);
         //intent.setAction(IngredientService.ACTION_FETCH_RECIPES);
+        //PendingIntent recipeServicePendingIntent = PendingIntent.getService(context, 0, intent, 0);
         PendingIntent recipeServicePendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredient_widget);
+
         views.setOnClickPendingIntent(R.id.widget_cake_image, recipeServicePendingIntent);
 
         // Instruct the widget manager to update the widget
@@ -36,6 +37,7 @@ public class IngredientWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
+        Log.v(LOG_TAG, "onUpdate");
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
@@ -43,11 +45,13 @@ public class IngredientWidget extends AppWidgetProvider {
 
     @Override
     public void onEnabled(Context context) {
+        Log.v(LOG_TAG, "onEnabled");
         // Enter relevant functionality for when the first widget is created
     }
 
     @Override
     public void onDisabled(Context context) {
+        Log.v(LOG_TAG, "onDisabled");
         // Enter relevant functionality for when the last widget is disabled
     }
 }
