@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.gzr7702.freshlybaked.MainActivity;
 import com.gzr7702.freshlybaked.R;
 
 /**
@@ -29,7 +28,8 @@ public class IngredientWidgetProvider extends AppWidgetProvider {
         //PendingIntent recipeServicePendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredient_widget);
 
-        views.setOnClickPendingIntent(R.id.widget_cake_image, recipeServicePendingIntent);
+        views.setPendingIntentTemplate(R.id.widget_baked_good_list, recipeServicePendingIntent);
+        views.setEmptyView(R.id.widget_baked_good_list, R.id.empty_view);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
