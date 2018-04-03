@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.Context;
 import android.util.Log;
 
+import com.gzr7702.freshlybaked.RecipeLoader;
+
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
@@ -20,7 +22,7 @@ public class IngredientService extends IntentService {
     }
 
     /**
-     * Starts this service to perform action Foo with the given parameters. If
+     * Starts this service to perform action ACTION_FETCH_RECIPES with the given parameters. If
      * the service is already performing a task this action will be queued.
      *
      * @see IntentService
@@ -37,6 +39,7 @@ public class IngredientService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
+            // Check just in case someone else uses this service
             if (ACTION_FETCH_RECIPES.equals(action)) {
                 handleActionFetchRecipes();
             }
@@ -50,6 +53,8 @@ public class IngredientService extends IntentService {
     private void handleActionFetchRecipes() {
         // TODO: use RecipeLoader to get recipes
         Log.v("IngredientService", "Fetching recipes...");
+        RecipeLoader rl = new RecipeLoader(this);
+        startActionFetchRecipes(this);
     }
 
 }

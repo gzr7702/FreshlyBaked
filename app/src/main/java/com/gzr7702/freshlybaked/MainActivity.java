@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
+import com.gzr7702.freshlybaked.IdlingResource.SimpleIdlingResource;
 import com.gzr7702.freshlybaked.data.Recipe;
 
 import java.util.List;
@@ -30,6 +35,10 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.LayoutManager mLayoutManager;
     private TextView mEmptyStateTextView;
     private static final int RECIPE_LOADER_ID = 1;
+
+    // Create variable for idling resource for testing
+    @Nullable
+    private SimpleIdlingResource mIdlingResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +75,17 @@ public class MainActivity extends AppCompatActivity
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.internet_unavailable_message);
         }
+
+        getIdlingResource();
     }
 
     @Override
     public Loader<List<Recipe>> onCreateLoader(int id, Bundle args) {
+
+        if(mIdlingResource != null){
+            mIdlingResource.setIdleState(true);
+        }
+
         return new RecipeLoader(this);
     }
 
@@ -85,5 +101,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoaderReset(Loader<List<Recipe>> loader) {
         loader = null;
+    }
+
+    /**
+     * Only called from test, creates and returns a new {@link SimpleIdlingResource}.
+     */
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new SimpleIdlingResource();
+        }
+        return mIdlingResource;
     }
 }

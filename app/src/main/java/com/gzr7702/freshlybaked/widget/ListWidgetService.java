@@ -3,9 +3,13 @@ package com.gzr7702.freshlybaked.widget;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+
+import com.gzr7702.freshlybaked.R;
 
 
 public class ListWidgetService extends RemoteViewsService {
@@ -18,6 +22,16 @@ public class ListWidgetService extends RemoteViewsService {
 
 class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     Context mContext;
+    private static final String[] items={"lorem", "ipsum", "dolor",
+            "sit", "amet", "consectetuer",
+            "adipiscing", "elit", "morbi",
+            "vel", "ligula", "vitae",
+            "arcu", "aliquet", "mollis",
+            "etiam", "vel", "erat",
+            "placerat", "ante",
+            "porttitor", "sodales",
+            "pellentesque", "augue",
+            "purus"};
 
     public ListRemoteViewsFactory(Context applicationContext) {
         mContext = applicationContext;
@@ -30,7 +44,7 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public void onDataSetChanged() {
-        // TODO: use Loader to fetch data
+        Log.v("ListWidgetService", "onDataSetChanged()");
     }
 
     @Override
@@ -40,12 +54,24 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public int getCount() {
-        return 0;
+        return items.length;
     }
 
     @Override
     public RemoteViews getViewAt(int position) {
-        return null;
+        RemoteViews row=new RemoteViews(mContext.getPackageName(),
+                R.layout.widget_row);
+
+        row.setTextViewText(android.R.id.text1, items[position]);
+
+        Intent i=new Intent();
+        Bundle extras=new Bundle();
+
+        extras.putString("word", items[position]);
+        i.putExtras(extras);
+        row.setOnClickFillInIntent(android.R.id.text1, i);
+
+        return(row);
     }
 
     @Override
